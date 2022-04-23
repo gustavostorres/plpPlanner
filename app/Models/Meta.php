@@ -18,4 +18,8 @@ class Meta extends Model
     public function categoria(){
         return $this->belongsTo(Categoria::class, 'categoria_id');
     }
+
+    public function tarefas(){
+        return $this->belongsToMany(Tarefa::class, 'tarefaMeta');
+    }
 }

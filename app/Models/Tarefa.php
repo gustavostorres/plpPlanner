@@ -19,4 +19,8 @@ class Tarefa extends Model
         return $this->belongsTo(Categoria::class, 'categoria_id');
     }
 
+    public function metas(){
+        return $this->belongsToMany(Meta::class, 'tarefaMeta');
+    }
+
 }
