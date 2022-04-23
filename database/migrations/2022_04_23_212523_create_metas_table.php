@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTarefasTable extends Migration
+class CreateMetasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateTarefasTable extends Migration
      */
     public function up()
     {
-        Schema::create('tarefas', function (Blueprint $table) {
+        Schema::create('metas', function (Blueprint $table) {
             $table->id();
-            $table->enum('statusTarefa',['finalizado','cancelado','emAndamento','naoIniciado']);
-            $table->enum('turno',['matutino','vespertino','noturno'])->nullable();
-            $table->date('dataTarefa')->nullable();
-            $table->string('nomeTarefa');
+            $table->integer('quantidadeTarefa')->default(0);
+            $table->enum('statusMeta', ['comSucesso', 'semSucesso', 'parcialmenteAtingidas']);
+            $table->date('dataMeta')->nullable();
+            $table->string('nomeMeta');
             $table->unsignedBigInteger('categoria_id');
             $table->foreign('categoria_id')->references('id')->on('categorias');
 
@@ -34,6 +34,6 @@ class CreateTarefasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tarefas');
+        Schema::dropIfExists('metas');
     }
 }
