@@ -19,6 +19,8 @@ class CreateTarefasTable extends Migration
             $table->enum('turno',['matutino','vespertino','noturno'])->nullable();
             $table->date('dataTarefa')->nullable();
             $table->string('nomeTarefa');
+            $table->unsignedBigInteger('categoria_id');
+            $table->foreign('categoria_id')->references('id')->on('categorias');
 
             $table->softDeletes();
             $table->timestamps();
