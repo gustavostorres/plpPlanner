@@ -15,9 +15,9 @@ class CreateTarefasTable extends Migration
     {
         Schema::create('tarefas', function (Blueprint $table) {
             $table->id();
-            $table->enum('statusTarefa',['finalizado','cancelado','em_andamento','nao_iniciado']);
+            $table->enum('statusTarefa',['finalizado','cancelado','emAndamento','naoIniciado']);
             $table->enum('turno',['matutino','vespertino','noturno'])->nullable();
-            $table->date('data_tarefa')->nullable();
+            $table->date('dataTarefa')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
