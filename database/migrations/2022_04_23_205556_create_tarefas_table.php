@@ -18,6 +18,7 @@ class CreateTarefasTable extends Migration
             $table->enum('statusTarefa',['finalizado','cancelado','emAndamento','naoIniciado']);
             $table->enum('turno',['matutino','vespertino','noturno'])->nullable();
             $table->date('dataTarefa')->nullable();
+            $table->string('nomeTarefa');
 
             $table->softDeletes();
             $table->timestamps();

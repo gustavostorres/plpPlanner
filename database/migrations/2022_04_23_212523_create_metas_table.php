@@ -18,6 +18,7 @@ class CreateMetasTable extends Migration
             $table->integer('quantidadeTarefa')->default(0);
             $table->enum('statusMeta', ['comSucesso', 'semSucesso', 'parcialmenteAtingidas']);
             $table->date('dataMeta')->nullable();
+            $table->string('nomeMeta');
 
             $table->softDeletes();
             $table->timestamps();
