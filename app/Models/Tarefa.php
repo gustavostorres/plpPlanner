@@ -12,11 +12,15 @@ class Tarefa extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'statusTarefa','turno', 'titulo', 'dataTarefa', 'nomeTarefa', 'categoria_id'
+        'statusTarefa','turno', 'titulo', 'dataTarefa', 'nomeTarefa', 'categoria_id', 'user_id'
     ];
 
     public function categoria(){
         return $this->belongsTo(Categoria::class, 'categoria_id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function metas(){
