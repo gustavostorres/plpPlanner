@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TarefaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +13,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::group(['middleware' => ['auth']], function(){
+    Route::prefix('tarefas')->name('tarefas.')->group(function(){
+        Route::get('/', function () {
+            return view('/tarefas/index');
+        })->name('index');
+        Route::get('/new', function () {
+            return view('/tarefas/new');
+        })->name('new');
+        Route::post('/salvar', [TarefaController::class, 'salvar'])->name('salvar');
+    });
+});
 
 Route::get('/', function () {
     return view('welcome');
