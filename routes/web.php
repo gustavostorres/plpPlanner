@@ -16,14 +16,12 @@ use App\Http\Controllers\TarefaController;
 
 Route::group(['middleware' => ['auth']], function(){
     Route::prefix('tarefas')->name('tarefas.')->group(function(){
-        Route::get('/', function () {
-            return view('/tarefas/index');
-        })->name('index');
         Route::get('/index', [TarefaController::class, 'index'])->name('index');
-        Route::get('/new', function () {
-            return view('/tarefas/new');
-        })->name('new');
         Route::post('/salvar', [TarefaController::class, 'salvar'])->name('salvar');
+        Route::get('/edit/{id}', [TarefaController::class, 'edit'])->name('edit');
+        Route::post('/update', [TarefaController::class, 'update'])->name('update');
+        Route::get('/create', [TarefaController::class, 'create'])->name('create');
+        Route::get('/show/{id}', [TarefaController::class, 'show'])->name('show');
     });
 });
 
