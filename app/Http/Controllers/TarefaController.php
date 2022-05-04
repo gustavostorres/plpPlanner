@@ -21,12 +21,12 @@ class TarefaController extends Controller
 
     public function salvar(Request $request)
     {
-    	$tarefa = Tarefa::create(['nomeTarefa'=>$request->nomeTarefa, 'dataTarefa'=>$request->dataTarefa, 
+    	$tarefa = Tarefa::create(['nomeTarefa'=>$request->nomeTarefa, 'dataTarefa'=>$request->dataTarefa,
     		'turno'=>$request->turno, 'statusTarefa'=>'naoIniciado', 'categoria_id'=>'1', 'titulo'=>$request->titulo, 'user_id'=>$request->user_id]);
     	$tarefas = Tarefa::where('user_id', $tarefa->user_id)->get();
     	$tarefa->save();
     	//$tarefas->metas()->sync([]);
-    	return view('tarefas.index')->with(['tarefas'=>$tarefas]);
+    	return redirect(route('tarefas.index'))->with(['tarefas'=>$tarefas]);
     }
 
     public function show($id)
