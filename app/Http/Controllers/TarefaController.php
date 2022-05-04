@@ -2,37 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\Tarefa;
+use Illuminate\Support\Facades\Auth;
 
 class TarefaController extends Controller
 {
-	public function index($id)
+	public function index()
     {
-        $tarefas = Tarefa::where('user_id', $id)->get();
-        return view('tarefas.index')->with(['tarefas'=>$tarefas]);
+        $tarefas = Tarefa::where('user_id', Auth::user()->id)->get();
+        $categorias = Categoria::all();
+        return view('tarefas.index')->with(['categorias'=> $categorias, 'tarefas'=>$tarefas]);
     }
 
     public function create()
     {
     	$categorias = Categoria::all();
-    	return view('view_criar_tarefa')->with(['categorias'=>$categorias]);
+    	return view('tarefas.new')->with(['categorias'=>$categorias]);
     }
 
     public function salvar(Request $request)
     {
-    	$tarefa = Tarefa::create(['nomeTarefa'=>$request->nomeTarefa, 'dataTarefa'=>$request->dataTarefa, 
-    		'turno'=>$request->turno, 'statusTarefa'=>'naoIniciado', 'categoria_id'=>'1', 'titulo'=>$request->titulo, 'user_id'=>$request->user_id]);
+    	$tarefa = Tarefa::create(['nomeTarefa'=>$request->nomeTarefa, 'dataTarefa'=>$request->dataTarefa,
+    		'turno'=>$request->turno, 'statusTarefa'=>'naoIniciado', 'categoria_id'=>$request->categoria_id, 'titulo'=>$request->titulo, 'user_id'=>$request->user_id]);
     	$tarefas = Tarefa::where('user_id', $tarefa->user_id)->get();
-    	$tarefa->save();
+        $tarefa->save();
     	//$tarefas->metas()->sync([]);
-    	return view('tarefas.index')->with(['tarefas'=>$tarefas]);
+    	return redirect(route('tarefas.index'));
     }
 
     public function show($id)
     {
     	$tarefa = Tarefa::find($id);
-    	return view('view_tarefa_especifica')->with(['tarefa'=>$tarefa]);
+    	return view('tarefas.show')->with(['tarefa'=>$tarefa]);
     }
 
     public function destroy($id)
@@ -52,8 +55,9 @@ class TarefaController extends Controller
 
     public function edit($id)
     {
+        $categorias = Categoria::all();
     	$tarefa = Tarefa::find($id);
-    	return view('tarefas.edit')->with(['tarefa'=>$tarefa]);
+    	return view('tarefas.update')->with(['categorias'=>$categorias, 'tarefa'=>$tarefa]);
     }
 
     public function update(Request $request)
@@ -66,7 +70,7 @@ class TarefaController extends Controller
     	$tarefa->statusTarefa = $request->statusTarefa;
     	$tarefa->categoria_id = $request->categoria_id;
     	$tarefa->update();
-    	return redirect()->back();
+        return redirect(route('tarefas.index'));
     }
 
 }

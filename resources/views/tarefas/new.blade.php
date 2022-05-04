@@ -1,14 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Criar uma nova tarefa
-        </h2>
-    </x-slot>
-
-    @php
-        $categorias = App\Models\Categoria::all();
-    @endphp
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -34,7 +24,7 @@
                           <option value="noturno">Noturno</option>
                       </select><br>
                       <input type="hidden" id="user_id" name="user_id" value="{{Auth::user()->id}}"><br>
-                      <x-button class="btn" type="submit">Enviar</x-button><br>
+                      <button class="btn btn-success" type="submit">Enviar</button><br>
                     </form>
                 </div>
             </div>

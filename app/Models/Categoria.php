@@ -15,10 +15,6 @@ class Categoria extends Model
         'nomeCategoria'
     ];
 
-    public function metas(){
-        return $this->hasMany(Meta::class, 'categoria_id');
-    }
-
     public function tarefas(){
         return $this->hasMany(Tarefa::class, 'categoria_id');
     }

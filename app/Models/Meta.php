@@ -12,12 +12,9 @@ class Meta extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'statusMeta', 'quantidadeTarefa', 'dataMeta', 'nomeMeta', 'categoria_id'
+        'statusMeta', 'quantidadeTarefa', 'dataMeta', 'nomeMeta'
     ];
 
-    public function categoria(){
-        return $this->belongsTo(Categoria::class, 'categoria_id');
-    }
 
     public function tarefas(){
         return $this->belongsToMany(Tarefa::class, 'tarefaMeta');
