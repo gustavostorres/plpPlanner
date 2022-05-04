@@ -20,8 +20,8 @@
                             @if($categoria->id == $tarefa->categoria_id)
                                 <li>
                                     {{$tarefa->titulo}}, no turno {{$tarefa->turno}}. Status: {{$tarefa->statusTarefa}}
-                                    <a href="/tarefas/edit/{{$tarefa->id}}" class="btn btn-primary">Editar tarefa</a>
-                                    <a href="/tarefas/show/{{$tarefa->id}}" class="btn btn-primary">Mostrar detalhes</a>
+                                    <a href="{{route('tarefas.edit', ['id' => $tarefa->id])}}" class="btn btn-primary">Editar tarefa</a>
+                                    <a href="{{route('tarefas.show', ['id' => $tarefa->id])}}" class="btn btn-primary">Mostrar detalhes</a>
                                 </li>
                             @endif
                         @endforeach
