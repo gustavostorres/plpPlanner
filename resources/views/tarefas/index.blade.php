@@ -5,6 +5,9 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     {{Auth::user()->name}}, bem vindo a sua página de tarefas!
                 </div>
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <a href="{{route('tarefas.create')}}" class="btn btn-success">Criar nova tarefa</a>
+                </div>
             </div>
             <br>
             @foreach($categorias as $categoria)
@@ -16,7 +19,9 @@
                         @foreach($tarefas as $tarefa)
                             @if($categoria->id == $tarefa->categoria_id)
                                 <li>
-                                    {{$tarefa->titulo}}, {{$tarefa->turno}}, {{$tarefa->statusTarefa}}
+                                    {{$tarefa->titulo}}, no turno {{$tarefa->turno}}. Status: {{$tarefa->statusTarefa}}
+                                    <a href="{{route('tarefas.edit', ['id' => $tarefa->id])}}" class="btn btn-primary">Editar tarefa</a>
+                                    <a href="{{route('tarefas.show', ['id' => $tarefa->id])}}" class="btn btn-primary">Mostrar detalhes</a>
                                 </li>
                             @endif
                         @endforeach

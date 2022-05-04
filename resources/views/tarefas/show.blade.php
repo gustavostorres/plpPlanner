@@ -9,7 +9,7 @@
                     <label for="dataTarefa">Data: {{$tarefa->dataTarefa}} </label><br>
                     <label for="turno">Turno: {{$tarefa->turno}} </label><br>
                     <label for="statusTarefa">Status: {{$tarefa->statusTarefa}} </label><br>
-                    <a href="{{ url()->previous() }}" class="btn btn-success" type="button">Voltar</a><br>
+                    <a href="{{url()->previous()}}" class="btn btn-primary" type="button">Voltar</a><br>
                 </div>
             </div>
         </div>
