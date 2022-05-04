@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/', function () {
             return view('/tarefas/index');
         })->name('index');
+        Route::get('/index', [TarefaController::class, 'index'])->name('index');
         Route::get('/new', function () {
             return view('/tarefas/new');
         })->name('new');

@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\Tarefa;
+use Illuminate\Support\Facades\Auth;
 
 class TarefaController extends Controller
 {
-	public function index($id)
+	public function index()
     {
-        $tarefas = Tarefa::where('user_id', $id)->get();
-        return view('tarefas.index')->with(['tarefas'=>$tarefas]);
+        $tarefas = Tarefa::where('user_id', Auth::user()->id)->get();
+        $categorias = Categoria::all();
+        return view('tarefas.index')->with(['categorias'=> $categorias, 'tarefas'=>$tarefas]);
     }
 
     public function create()
