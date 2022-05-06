@@ -12,7 +12,7 @@ class Meta extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'statusMeta', 'quantidadeTarefa', 'dataMeta', 'nomeMeta'
+        'statusMeta', 'quantidadeTarefa', 'dataMeta', 'nomeMeta', 'descricao', 'categoria_id', 'user_id'
     ];
 
 
@@ -22,6 +22,10 @@ class Meta extends Model
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function categoria(){
+        return $this->belongsTo(Categoria::class, 'categoria_id');
     }
 
 }

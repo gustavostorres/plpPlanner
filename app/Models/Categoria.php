@@ -18,4 +18,8 @@ class Categoria extends Model
     public function tarefas(){
         return $this->hasMany(Tarefa::class, 'categoria_id');
     }
+
+    public function metas(){
+        return $this->hasMany(Tarefa::class, 'categoria_id');
+    }
 }
