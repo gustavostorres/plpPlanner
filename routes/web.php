@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::post('/update', [TarefaController::class, 'update'])->name('update');
         Route::get('/create', [TarefaController::class, 'create'])->name('create');
         Route::get('/show/{id}', [TarefaController::class, 'show'])->name('show');
+        Route::get('/destroy/{id}', [TarefaController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('metas')->name('metas.')->group(function() {
@@ -32,13 +33,14 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/edit/{id}', [MetaController::class, 'edit'])->name('edit');
         Route::post('/update', [MetaController::class, 'update'])->name('update');
         Route::get('/show/{id}', [MetaController::class, 'show'])->name('show');
+        Route::get('/destroy/{id}', [MetaController::class, 'destroy'])->name('destroy');
     });
 
 });
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
