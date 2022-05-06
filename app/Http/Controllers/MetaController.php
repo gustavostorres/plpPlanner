@@ -58,4 +58,11 @@ class MetaController extends Controller
         return view('metas.show')->with(['meta'=>$meta]);
     }
 
+    public function destroy($id)
+    {
+        $meta = Meta::find($id);
+        $meta->delete();
+        return redirect(route('metas.index'));
+    }
+
 }

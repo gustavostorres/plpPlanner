@@ -48,9 +48,8 @@ class TarefaController extends Controller
     public function destroy($id)
     {
     	$tarefa = Tarefa::find($id);
-    	$tarefas = Tarefa::where('user_id', $tarefa->user_id)->get();
     	$tarefa->delete();
-    	return view('tarefas.index')->with(['tarefas'=>$tarefas]);
+    	return redirect(route('tarefas.index'));
     	/*
     	Outra alternativa seria:
 
