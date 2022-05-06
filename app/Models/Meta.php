@@ -19,4 +19,9 @@ class Meta extends Model
     public function tarefas(){
         return $this->belongsToMany(Tarefa::class, 'tarefaMeta');
     }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

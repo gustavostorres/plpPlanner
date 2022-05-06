@@ -19,6 +19,8 @@ class CreateMetasTable extends Migration
             $table->enum('statusMeta', ['comSucesso', 'semSucesso', 'parcialmenteAtingidas']);
             $table->date('dataMeta')->nullable();
             $table->string('nomeMeta');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->softDeletes();
             $table->timestamps();

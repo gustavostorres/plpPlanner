@@ -45,4 +45,9 @@ class User extends Authenticatable
     public function tarefas(){
         return $this->hasMany('App\Models\Tarefa');
     }
+
+    public function metas(){
+        return $this->hasMany('App\Models\Meta');
+    }
+
 }
