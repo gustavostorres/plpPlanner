@@ -14,10 +14,10 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <h5>
-                            {{$categoria->nomeCategoria}}
+                            {{$categoria}}
                         </h5>
                         @foreach($tarefas as $tarefa)
-                            @if($categoria->id == $tarefa->categoria_id)
+                            @if($categoria == $tarefa->categoria->nomeCategoria)
                                 <li>
                                     {{$tarefa->titulo}}, no turno {{$tarefa->turno}}. Status: {{$tarefa->statusTarefa}}
                                     <a href="{{route('tarefas.edit', ['id' => $tarefa->id])}}" class="btn btn-primary">Editar tarefa</a>

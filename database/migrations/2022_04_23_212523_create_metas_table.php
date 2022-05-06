@@ -16,9 +16,14 @@ class CreateMetasTable extends Migration
         Schema::create('metas', function (Blueprint $table) {
             $table->id();
             $table->integer('quantidadeTarefa')->default(0);
-            $table->enum('statusMeta', ['comSucesso', 'semSucesso', 'parcialmenteAtingidas']);
+            $table->enum('statusMeta', ['comSucesso', 'semSucesso', 'parcialmenteAtingida', 'indefinido']);
             $table->date('dataMeta')->nullable();
             $table->string('nomeMeta');
+            $table->text('descricao');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('categoria_id');
+            $table->foreign('categoria_id')->references('id')->on('categorias');
 
             $table->softDeletes();
             $table->timestamps();

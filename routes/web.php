@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TarefaController;
+use App\Http\Controllers\MetaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,16 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/create', [TarefaController::class, 'create'])->name('create');
         Route::get('/show/{id}', [TarefaController::class, 'show'])->name('show');
     });
+
+    Route::prefix('metas')->name('metas.')->group(function() {
+        Route::get('/index', [MetaController::class, 'index'])->name('index');
+        Route::get('/create', [MetaController::class, 'create'])->name('create');
+        Route::post('/salvar', [MetaController::class, 'salvar'])->name('salvar');
+        Route::get('/edit/{id}', [MetaController::class, 'edit'])->name('edit');
+        Route::post('/update', [MetaController::class, 'update'])->name('update');
+        Route::get('/show/{id}', [MetaController::class, 'show'])->name('show');
+    });
+
 });
 
 Route::get('/', function () {
