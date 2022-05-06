@@ -22,6 +22,7 @@
                                     {{$tarefa->titulo}}, no turno {{$tarefa->turno}}. Status: {{$tarefa->statusTarefa}}
                                     <a href="{{route('tarefas.edit', ['id' => $tarefa->id])}}" class="btn btn-primary">Editar tarefa</a>
                                     <a href="{{route('tarefas.show', ['id' => $tarefa->id])}}" class="btn btn-primary">Mostrar detalhes</a>
+                                    <a href="{{route('tarefas.destroy', ['id' => $tarefa->id])}}" class="btn btn-danger">Apagar</a>
                                 </li>
                             @endif
                         @endforeach
