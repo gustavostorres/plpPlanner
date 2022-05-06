@@ -16,7 +16,7 @@ class CreateMetasTable extends Migration
         Schema::create('metas', function (Blueprint $table) {
             $table->id();
             $table->integer('quantidadeTarefa')->default(0);
-            $table->enum('statusMeta', ['comSucesso', 'semSucesso', 'parcialmenteAtingidas', 'indefinido']);
+            $table->enum('statusMeta', ['comSucesso', 'semSucesso', 'parcialmenteAtingida', 'indefinido']);
             $table->date('dataMeta')->nullable();
             $table->string('nomeMeta');
             $table->text('descricao');
