@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Tarefa;
 use Illuminate\Support\Facades\Auth;
 
+
 class TarefaController extends Controller
 {
 	public function index()
@@ -31,8 +32,14 @@ class TarefaController extends Controller
 
     public function salvar(Request $request)
     {
-    	$tarefa = Tarefa::create(['nomeTarefa'=>$request->nomeTarefa, 'dataTarefa'=>$request->dataTarefa,
-    		'turno'=>$request->turno, 'statusTarefa'=>'naoIniciado', 'categoria_id'=>$request->categoria_id, 'titulo'=>$request->titulo, 'user_id'=>$request->user_id]);
+        /*$validatedTime = $request->validate([
+            'horarioFim' => ['required', 'time', 'after:horarioInicio']
+        ]);*/
+
+
+    	$tarefa = Tarefa::create(['nomeTarefa'=>$request->nomeTarefa, 'horarioInicio'=>$request->horarioInicio,
+            'horarioFim'=>$request->horarioFim, 'data' =>$request->data, 'statusTarefa'=>'naoIniciado', 'categoria_id'=>$request->categoria_id,
+            'titulo'=>$request->titulo, 'user_id'=>$request->user_id]);
     	$tarefas = Tarefa::where('user_id', $tarefa->user_id)->get();
         $tarefa->save();
     	//$tarefas->metas()->sync([]);
@@ -50,13 +57,6 @@ class TarefaController extends Controller
     	$tarefa = Tarefa::find($id);
     	$tarefa->delete();
     	return redirect(route('tarefas.index'));
-    	/*
-    	Outra alternativa seria:
-
-    	$tarefa = Tarefa::find($id);
-    	$tarefa->delete();
-    	return redirect()->back();
-    	*/
     }
 
     public function edit($id)
@@ -68,10 +68,15 @@ class TarefaController extends Controller
 
     public function update(Request $request)
     {
+        /*$validatedTime = $request->validate([
+            'horarioFim' => ['required', 'time', 'after:horarioInicio']
+        ]);*/
+
     	$tarefa = Tarefa::find($request->tarefa_id);
     	$tarefa->nomeTarefa = $request->nomeTarefa;
-    	$tarefa->dataTarefa = $request->dataTarefa;
-    	$tarefa->turno = $request->turno;
+        $tarefa->data = $request->data;
+    	$tarefa->horarioInicio = $request->horarioInicio;
+        $tarefa->horarioFim = $request->horarioFim;
     	$tarefa->titulo = $request->titulo;
     	$tarefa->statusTarefa = $request->statusTarefa;
     	$tarefa->categoria_id = $request->categoria_id;
