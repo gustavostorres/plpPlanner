@@ -45,6 +45,11 @@
                         </select><br>
                         <label for="dataMeta">Data:</label><br>
                         <input type="date" id="dataMeta" name="dataMeta" value="{{$meta->dataMeta}}"><br><br>
+                        <label for="dataFinalMeta">Data Final:</label><br>
+                        <input class= "@error('dataFinalMeta') is-invalid @enderror" type="date" id="dataFinalMeta" name="dataFinalMeta" value="{{$meta->dataFinalMeta}}"><br><br>
+                        @error('dataFinalMeta')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <a href="{{url()->previous()}}" class="btn btn-primary" type="button">Voltar</a>
                         <button class="btn btn-success" type="submit">Enviar</button>
                         <br>

@@ -12,7 +12,7 @@ class Meta extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'statusMeta', 'quantidadeTarefa', 'dataMeta', 'nomeMeta', 'descricao', 'categoria_id', 'user_id'
+        'statusMeta', 'quantidadeTarefa', 'dataMeta', 'dataFinalMeta', 'nomeMeta', 'descricao', 'categoria_id', 'user_id'
     ];
 
 
