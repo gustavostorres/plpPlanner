@@ -37,15 +37,15 @@
                             <option @if($tarefa->statusTarefa == "naoIniciado")
                                         selected
                                     @endif value="naoIniciado">Não iniciado</option>
-                            <option @if($tarefa->statusTarefa == "emAndamento")
+                            <option @if($tarefa->statusTarefa == "executada")
                                         selected
-                                    @endif value="emAndamento">Em andamento</option>
-                            <option @if($tarefa->statusTarefa == "cancelado")
+                                    @endif value="executada">Executada</option>
+                            <option @if($tarefa->statusTarefa == "parcialmenteExecutada")
                                         selected
-                                    @endif value="cancelado">Cancelado</option>
-                            <option @if($tarefa->statusTarefa == "finalizado")
+                                    @endif value="parcialmenteExecutada">Parcialmente Executada</option>
+                            <option @if($tarefa->statusTarefa == "adiada")
                                         selected
-                                    @endif value="finalizado">Finalizado</option>
+                                    @endif value="adiada">Adiada</option>
                         </select><br>
                         <input type="hidden" id="tarefa_id" name="tarefa_id" value="{{$tarefa->id}}"><br>
                         <a href="{{url()->previous()}}" class="btn btn-primary" type="button">Voltar</a>

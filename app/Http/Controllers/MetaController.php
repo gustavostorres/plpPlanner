@@ -25,8 +25,12 @@ class MetaController extends Controller
 
     public function salvar(Request $request)
     {
+        $validatedDate = $request->validate([
+            'dataFinalMeta' => ['required', 'date', 'after_or_equal:dataMeta']
+        ]);
+
         $meta = Meta::create(['statusMeta'=> 'indefinido', 'quantidadeTarefa'=>1,
-            'dataMeta'=>$request->dataMeta, 'nomeMeta'=>$request->nomeMeta,
+            'dataMeta'=>$request->dataMeta, 'dataFinalMeta'=>$request->dataFinalMeta, 'nomeMeta'=>$request->nomeMeta,
             'descricao'=>$request->descricao, 'categoria_id'=>$request->categoria_id,
             'user_id'=>Auth::user()->id]);
         $meta->save();
@@ -43,11 +47,16 @@ class MetaController extends Controller
 
     public function update(Request $request)
     {
+        $validatedDate = $request->validate([
+            'dataFinalMeta' => ['required', 'date', 'after_or_equal:dataMeta']
+        ]);
+
         $meta = Meta::find($request->meta_id);
         $meta->nomeMeta = $request->nomeMeta;
         $meta->categoria_id = $request->categoria_id;
         $meta->descricao = $request->descricao;
         $meta->dataMeta = $request->dataMeta;
+        $meta->dataFinalMeta = $request->dataFinalMeta;
         $meta->statusMeta = $request->statusMeta;
         $meta->update();
         return redirect(route('metas.index'));

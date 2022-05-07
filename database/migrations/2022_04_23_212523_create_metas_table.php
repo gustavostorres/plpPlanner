@@ -18,6 +18,7 @@ class CreateMetasTable extends Migration
             $table->integer('quantidadeTarefa')->default(0);
             $table->enum('statusMeta', ['comSucesso', 'semSucesso', 'parcialmenteAtingida', 'indefinido']);
             $table->date('dataMeta')->nullable();
+            $table->date('dataFinalMeta')->nullable();
             $table->string('nomeMeta');
             $table->text('descricao');
             $table->unsignedBigInteger('user_id');
