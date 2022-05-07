@@ -14,19 +14,26 @@
                 </div>
             </div>
             <br>
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                @foreach($metas as $meta)
+            @foreach($categorias as $categoria)
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <h5>
-                            {{$meta->nomeMeta}}
+                            {{$categoria}}
                         </h5>
-                        <a href="{{route('metas.edit', ['id' => $meta->id])}}" class="btn btn-primary">Editar meta</a>
-                        <a href="{{route('metas.show', ['id' => $meta->id])}}" class="btn btn-primary">Mostrar detalhes</a>
-                        <a href="{{route('metas.cadastrar.tarefa', ['id' => $meta->id])}}" class="btn btn-primary">Cad. Tarefa</a>
-                        <a href="{{route('metas.destroy', ['id' => $meta->id])}}" class="btn btn-danger">Apagar</a>
+                        @foreach($metas as $meta)
+                            @if($categoria == $meta->categoria->nomeCategoria)
+                                <li>
+                                    {{$meta->nomeMeta}} acontece entre {{$meta->dataMeta}} e {{$meta->dataFinalMeta}}
+                                    <a href="{{route('metas.edit', ['id' => $meta->id])}}" class="btn btn-primary">Editar meta</a>
+                                    <a href="{{route('metas.show', ['id' => $meta->id])}}" class="btn btn-primary">Mostrar detalhes</a>
+                                    <a href="{{route('metas.cadastrar.tarefa', ['id' => $meta->id])}}" class="btn btn-primary">Cad. Tarefa</a>
+                                    <a href="{{route('metas.destroy', ['id' => $meta->id])}}" class="btn btn-danger">Apagar</a>
+                                </li>
+                            @endif
+                        @endforeach
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
     </div>
 
