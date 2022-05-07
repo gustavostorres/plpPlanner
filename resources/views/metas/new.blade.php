@@ -22,7 +22,7 @@
                         @error('dataFinalMeta')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                      <a href="{{url()->previous()}}" class="btn btn-primary" type="button">Voltar</a>
+                      <a href="{{route('metas.index')}}" class="btn btn-primary" type="button">Voltar</a>
                       <button class="btn btn-success" type="submit">Enviar</button><br>
                     </form>
                 </div>
