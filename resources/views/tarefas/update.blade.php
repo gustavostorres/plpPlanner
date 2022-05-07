@@ -48,7 +48,7 @@
                                     @endif value="adiada">Adiada</option>
                         </select><br>
                         <input type="hidden" id="tarefa_id" name="tarefa_id" value="{{$tarefa->id}}"><br>
-                        <a href="{{url()->previous()}}" class="btn btn-primary" type="button">Voltar</a>
+                        <a href="{{route('tarefas.index')}}" class="btn btn-primary" type="button">Voltar</a>
                         <button class="btn btn-success" type="submit">Atualizar</button><br>
                     </form>
                 </div>

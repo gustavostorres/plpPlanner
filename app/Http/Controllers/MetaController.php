@@ -13,8 +13,14 @@ class MetaController extends Controller
 
     public function index(){
         $metas = Meta::where('user_id',Auth::user()->id)->get();
-
-        return view('metas.index')->with(['metas'=> $metas]);
+        $categorias = [];
+        // Resgate de apenas as categorias existentes nas tarefas do usuário
+        foreach ($metas as $meta){
+            if(!in_array($meta->categoria->nomeCategoria, $categorias, true)){
+                array_push($categorias,$meta->categoria->nomeCategoria);
+            }
+        }
+        return view('metas.index')->with(['metas'=> $metas, 'categorias'=> $categorias]);
     }
 
     public function create()
