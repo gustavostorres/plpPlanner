@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use App\Models\Meta;
+use App\Models\Tarefa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -72,6 +73,19 @@ class MetaController extends Controller
         $meta = Meta::find($id);
         $meta->delete();
         return redirect(route('metas.index'));
+    }
+
+    public function registrarTarefa(Request $request){
+        $meta = Meta::find($request->id);
+        $meta->tarefas()->sync($request->tarefa_id);
+        $meta->save();
+        return redirect(route('metas.index'));
+    }
+
+    public function cadastrar($id){
+        $meta = Meta::find($id);
+        $tarefas = Tarefa::where('user_id', Auth::user()->id)->get();
+        return view('metas.registraTarefa')->with(['tarefas'=>$tarefas, 'meta'=>$meta]);
     }
 
 }

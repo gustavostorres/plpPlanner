@@ -22,6 +22,7 @@
                         </h5>
                         <a href="{{route('metas.edit', ['id' => $meta->id])}}" class="btn btn-primary">Editar meta</a>
                         <a href="{{route('metas.show', ['id' => $meta->id])}}" class="btn btn-primary">Mostrar detalhes</a>
+                        <a href="{{route('metas.cadastrar.tarefa', ['id' => $meta->id])}}" class="btn btn-primary">Cad. Tarefa</a>
                         <a href="{{route('metas.destroy', ['id' => $meta->id])}}" class="btn btn-danger">Apagar</a>
                     </div>
                 @endforeach

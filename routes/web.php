@@ -34,6 +34,8 @@ Route::group(['middleware' => ['auth']], function(){
         Route::post('/update', [MetaController::class, 'update'])->name('update');
         Route::get('/show/{id}', [MetaController::class, 'show'])->name('show');
         Route::get('/destroy/{id}', [MetaController::class, 'destroy'])->name('destroy');
+        Route::post('/registrar/tarefa', [MetaController::class, 'registrarTarefa'])->name('registrar.tarefa');
+        Route::get('/cadastrar/{id}', [MetaController::class, 'cadastrar'])->name('cadastrar.tarefa');
     });
 
 });
