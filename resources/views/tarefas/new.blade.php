@@ -15,14 +15,12 @@
                       <input type="text" id="titulo" name="titulo"><br>
                       <label for="nomeTarefa">Descrição:</label><br>
                       <input type="text" id="nomeTarefa" name="nomeTarefa"><br>
-                      <label for="dataTarefa">Data:</label><br>
-                      <input type="date" id="dataTarefa" name="dataTarefa"><br>
-                      <label for="turno">Turno:</label><br>
-                      <select name="turno" id="turno">
-                          <option value="matutino">Matutino</option>
-                          <option value="vespertino">Vespertino</option>
-                          <option value="noturno">Noturno</option>
-                      </select><br>
+                      <label for="data">Data:</label><br>
+                      <input type="date" name="data"><br>
+                      <label for="horarioInicio">HorarioInicio:</label><br>
+                      <input type="time" name="horarioInicio"><br>
+                      <label for="horarioFim">HorarioFim:</label><br>
+                      <input type="time" name="horarioFim"><br>
                       <input type="hidden" id="user_id" name="user_id" value="{{Auth::user()->id}}"><br>
                       <a href="{{route('tarefas.index')}}" class="btn btn-primary" type="button">Voltar</a>
                       <button class="btn btn-success" type="submit">Enviar</button><br>
