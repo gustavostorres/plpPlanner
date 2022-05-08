@@ -32,10 +32,8 @@ class MetaController extends Controller
 
     public function salvar(Request $request)
     {
-        $hoje = Carbon::today('America/Recife');
-        $hoje->toDateString();
         $validatedDate = $request->validate([
-            'dataMeta' => ['required', 'date', 'after_or_equal:hoje'],
+            'dataMeta' => ['required', 'date', 'after_or_equal:today'],
             'dataFinalMeta' => ['required', 'date', 'after_or_equal:dataMeta'],
             'nomeMeta' => ['required', 'string'],
             'descricao' => ['required'],
@@ -60,10 +58,8 @@ class MetaController extends Controller
 
     public function update(Request $request)
     {
-        $hoje = Carbon::today('America/Recife');
-        $hoje->toDateString();
         $validatedDate = $request->validate([
-            'dataMeta' => ['required', 'date', 'after_or_equal:hoje'],
+            'dataMeta' => ['required', 'date', 'after_or_equal:today'],
             'dataFinalMeta' => ['required', 'date', 'after_or_equal:dataMeta'],
             'nomeMeta' => ['required', 'string'],
             'descricao' => ['required'],
