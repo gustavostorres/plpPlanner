@@ -48,10 +48,15 @@ class TarefaController extends Controller
                 "horario" => "A diferença entre os horários tem que ser de pelo menos 30 minutos"
             ])->withInput();
         }
-
+        
     	$tarefa = Tarefa::create(['nomeTarefa'=>$request->nomeTarefa, 'horarioInicio'=>$request->horarioInicio,
             'horarioFim'=>$request->horarioFim, 'data' =>$request->data, 'statusTarefa'=>'naoIniciado', 'categoria_id'=>$request->categoria_id,
-            'titulo'=>$request->titulo, 'user_id'=>$request->user_id]);
+            'titulo'=>$request->titulo, 'user_id'=>$request->user_id, 'lembrete'=>$request->lembrete]);
+        /*
+        if($request->lembrete)
+            $dataLembrete = $request->data + 7 dias
+            funçãoLembrete($dataLembrete); //envia um email em 7 dias
+        */
     	$tarefas = Tarefa::where('user_id', $tarefa->user_id)->get();
         $tarefa->save();
     	return redirect(route('tarefas.index'));
@@ -103,6 +108,7 @@ class TarefaController extends Controller
     	$tarefa->titulo = $request->titulo;
     	$tarefa->statusTarefa = $request->statusTarefa;
     	$tarefa->categoria_id = $request->categoria_id;
+        $tarefa->lembrete = $request->lembrete;
     	$tarefa->update();
         return redirect(route('tarefas.index'));
     }
