@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Meta;
 use App\Models\Tarefa;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,8 +32,10 @@ class MetaController extends Controller
 
     public function salvar(Request $request)
     {
+        $hoje = Carbon::today('America/Recife');
+        $hoje->toDateString();
         $validatedDate = $request->validate([
-            'dataMeta' => ['required', 'date'],
+            'dataMeta' => ['required', 'date', 'after_or_equal:hoje'],
             'dataFinalMeta' => ['required', 'date', 'after_or_equal:dataMeta'],
             'nomeMeta' => ['required', 'string'],
             'descricao' => ['required'],
@@ -57,8 +60,10 @@ class MetaController extends Controller
 
     public function update(Request $request)
     {
+        $hoje = Carbon::today('America/Recife');
+        $hoje->toDateString();
         $validatedDate = $request->validate([
-            'dataMeta' => ['required', 'date'],
+            'dataMeta' => ['required', 'date', 'after_or_equal:hoje'],
             'dataFinalMeta' => ['required', 'date', 'after_or_equal:dataMeta'],
             'nomeMeta' => ['required', 'string'],
             'descricao' => ['required'],
