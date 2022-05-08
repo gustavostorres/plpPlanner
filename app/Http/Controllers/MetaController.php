@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Meta;
 use App\Models\Tarefa;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,7 +33,11 @@ class MetaController extends Controller
     public function salvar(Request $request)
     {
         $validatedDate = $request->validate([
-            'dataFinalMeta' => ['required', 'date', 'after_or_equal:dataMeta']
+            'dataMeta' => ['required', 'date', 'after_or_equal:today'],
+            'dataFinalMeta' => ['required', 'date', 'after_or_equal:dataMeta'],
+            'nomeMeta' => ['required', 'string'],
+            'descricao' => ['required'],
+
         ]);
 
         $meta = Meta::create(['statusMeta'=> 'indefinido', 'quantidadeTarefa'=>1,
@@ -54,7 +59,11 @@ class MetaController extends Controller
     public function update(Request $request)
     {
         $validatedDate = $request->validate([
-            'dataFinalMeta' => ['required', 'date', 'after_or_equal:dataMeta']
+            'dataMeta' => ['required', 'date', 'after_or_equal:today'],
+            'dataFinalMeta' => ['required', 'date', 'after_or_equal:dataMeta'],
+            'nomeMeta' => ['required', 'string'],
+            'descricao' => ['required'],
+
         ]);
 
         $meta = Meta::find($request->meta_id);
