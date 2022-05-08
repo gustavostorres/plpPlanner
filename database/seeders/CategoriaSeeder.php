@@ -30,5 +30,14 @@ class CategoriaSeeder extends Seeder
         DB::table('categorias')->insert([
             'nomeCategoria'=> 'Trabalho'
         ]);
+        DB::table('categorias')->insert([
+            'nomeCategoria'=> 'Ligações importantes'
+        ]);
+        DB::table('categorias')->insert([
+            'nomeCategoria'=> 'Reuniões'
+        ]);
+        DB::table('categorias')->insert([
+            'nomeCategoria'=> 'Compras'
+        ]);
     }
 }
