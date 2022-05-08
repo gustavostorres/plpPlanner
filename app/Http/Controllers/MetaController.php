@@ -32,7 +32,11 @@ class MetaController extends Controller
     public function salvar(Request $request)
     {
         $validatedDate = $request->validate([
-            'dataFinalMeta' => ['required', 'date', 'after_or_equal:dataMeta']
+            'dataMeta' => ['required', 'date'],
+            'dataFinalMeta' => ['required', 'date', 'after_or_equal:dataMeta'],
+            'nomeMeta' => ['required', 'string'],
+            'descricao' => ['required'],
+
         ]);
 
         $meta = Meta::create(['statusMeta'=> 'indefinido', 'quantidadeTarefa'=>1,
@@ -54,7 +58,11 @@ class MetaController extends Controller
     public function update(Request $request)
     {
         $validatedDate = $request->validate([
-            'dataFinalMeta' => ['required', 'date', 'after_or_equal:dataMeta']
+            'dataMeta' => ['required', 'date'],
+            'dataFinalMeta' => ['required', 'date', 'after_or_equal:dataMeta'],
+            'nomeMeta' => ['required', 'string'],
+            'descricao' => ['required'],
+
         ]);
 
         $meta = Meta::find($request->meta_id);
