@@ -5,7 +5,6 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <form method="POST" action="{{route('tarefas.salvar')}}">
                         @csrf
-
                         <div class="row justify-content-center">
                             <div class="col-md-6">
                                 <label for="titulo">Titulo:</label><br>

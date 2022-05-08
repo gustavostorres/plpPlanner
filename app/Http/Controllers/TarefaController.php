@@ -81,9 +81,23 @@ class TarefaController extends Controller
 
     public function update(Request $request)
     {
-        /*$validatedTime = $request->validate([
-            'horarioFim' => ['required', 'time', 'after:horarioInicio']
-        ]);*/
+        $hoje = Carbon::today('America/Recife');
+        $hoje->toDateString();
+        $inicio = date_create_from_format('H:i', $request->horarioInicio);
+        $fim = date_create_from_format('H:i', $request->horarioFim);
+        $validatedTime = $request->validate([
+            'nomeTarefa' => ['required'],
+            'titulo' => ['required','string'],
+            'data' => ['required','date','after_or_equal:hoje'],
+            'horarioInicio' => ['required'],
+            'horarioFim' => ['required','after:horarioInicio'],
+
+        ]);
+        if (date_diff($inicio, $fim)->i < 30 && date_diff($inicio, $fim)->h == 0) {
+            return redirect()->back()->with([
+                "horario" => "A diferença entre os horários tem que ser de pelo menos 30 minutos"
+            ])->withInput();
+        }
 
     	$tarefa = Tarefa::find($request->tarefa_id);
     	$tarefa->nomeTarefa = $request->nomeTarefa;
