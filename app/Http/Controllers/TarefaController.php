@@ -32,17 +32,16 @@ class TarefaController extends Controller
 
     public function salvar(Request $request)
     {
-        /*$validatedTime = $request->validate([
-            'horarioFim' => ['required', 'time', 'after:horarioInicio']
-        ]);*/
-
-
     	$tarefa = Tarefa::create(['nomeTarefa'=>$request->nomeTarefa, 'horarioInicio'=>$request->horarioInicio,
             'horarioFim'=>$request->horarioFim, 'data' =>$request->data, 'statusTarefa'=>'naoIniciado', 'categoria_id'=>$request->categoria_id,
-            'titulo'=>$request->titulo, 'user_id'=>$request->user_id]);
+            'titulo'=>$request->titulo, 'user_id'=>$request->user_id, 'lembrete'=>$request->lembrete]);
+        /*
+        if($request->lembrete)
+            $dataLembrete = $request->data + 7 dias
+            funçãoLembrete($dataLembrete); //envia um email em 7 dias
+        */
     	$tarefas = Tarefa::where('user_id', $tarefa->user_id)->get();
         $tarefa->save();
-    	//$tarefas->metas()->sync([]);
     	return redirect(route('tarefas.index'));
     }
 
@@ -80,6 +79,7 @@ class TarefaController extends Controller
     	$tarefa->titulo = $request->titulo;
     	$tarefa->statusTarefa = $request->statusTarefa;
     	$tarefa->categoria_id = $request->categoria_id;
+        $tarefa->lembrete = $request->lembrete;
     	$tarefa->update();
         return redirect(route('tarefas.index'));
     }

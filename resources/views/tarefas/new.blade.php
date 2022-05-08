@@ -8,9 +8,11 @@
                       <label for="categoria_id">Categoria:</label><br>
                       <select name="categoria_id" id="categoria_id">
                           @foreach($categorias as $categoria)
-                          <option value="{{$categoria->id}}">{{$categoria->nomeCategoria}}</option>
+                              <option value="{{$categoria->id}}">{{$categoria->nomeCategoria}}</option>
                           @endforeach
-                      </select><br>
+                      </select>
+                      <label for="lembrete">Lembrete?</label>
+                      <input type="checkbox" name="lembrete"><br>
                       <label for="titulo">Titulo:</label><br>
                       <input type="text" id="titulo" name="titulo"><br>
                       <label for="nomeTarefa">Descrição:</label><br>

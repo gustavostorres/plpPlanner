@@ -13,7 +13,9 @@
                                         @endif
                                         value="{{$categoria->id}}">{{$categoria->nomeCategoria}}</option>
                             @endforeach
-                        </select><br>
+                        </select>
+                        <label for="lembrete">Lembrete?</label>
+                        <input @if($tarefa->lembrete) checked @endif type="checkbox" name="lembrete" id="lembrete"><br>
                         <label for="titulo">Titulo:</label><br>
                         <input value="{{$tarefa->titulo}}" type="text" id="titulo" name="titulo"><br>
                         <label for="nomeTarefa">Descrição:</label><br>
