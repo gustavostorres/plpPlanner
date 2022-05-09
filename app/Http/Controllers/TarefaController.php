@@ -48,7 +48,7 @@ class TarefaController extends Controller
                 "horario" => "A diferença entre os horários tem que ser de pelo menos 30 minutos"
             ])->withInput();
         }
-        
+
     	$tarefa = Tarefa::create(['nomeTarefa'=>$request->nomeTarefa, 'horarioInicio'=>$request->horarioInicio,
             'horarioFim'=>$request->horarioFim, 'data' =>$request->data, 'statusTarefa'=>'naoIniciado', 'categoria_id'=>$request->categoria_id,
             'titulo'=>$request->titulo, 'user_id'=>$request->user_id, 'lembrete'=>$request->lembrete]);

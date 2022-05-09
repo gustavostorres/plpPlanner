@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TarefaController;
 use App\Http\Controllers\MetaController;
+use App\Http\Controllers\PlannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,9 @@ Route::group(['middleware' => ['auth']], function(){
         Route::post('/registrar/tarefa', [MetaController::class, 'registrarTarefa'])->name('registrar.tarefa');
         Route::get('/cadastrar/{id}', [MetaController::class, 'cadastrar'])->name('cadastrar.tarefa');
     });
+
+    Route::get('/planner/{mes}/{ano}/{sinal}', [PlannerController::class, 'alterarMes'])->name('alterarMes');
+    Route::get('/planner', [PlannerController::class, 'gerarPlanner'])->name('gerarPlanner');
 
 });
 
