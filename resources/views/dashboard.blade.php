@@ -4,7 +4,7 @@
             <div class="row justify-content-center">
                 <a type="button" style="margin-top: 10px;margin-right: 25px"
                    href="{{route('alterarMes', ['mes' => $mes,'ano'=>$ano,'sinal'=>0])}}"><img class="" src="{{asset('img/setaEsquerda.png')}}" style="width:50px" alt=""></a>
-                <h4 class="display-4 mb-4 text-center">{{$mes}} de {{$ano}}</h4>
+                <h4 class="display-4 mb-4 text-center">{{$mes}}, {{$ano}}</h4>
                 <a type="button" style="margin-top: 10px;margin-left: 25px"
                    href="{{route('alterarMes', ['mes' => $mes,'ano'=>$ano,'sinal'=>1])}}"><img class="" src="{{asset('img/setaDireita.png')}}" style="width:50px" alt=""></a>
             </div>
@@ -31,8 +31,13 @@
                         <small class="col d-sm-none text-center text-muted">{{$i}}</small>
                         <span class="col-1"></span>
                     </h5>
-                    <a class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-info text-white"
-                       title="Tarefas" href="{{route('tarefas.index')}}">Tarefas</a>
+                    @php
+                    $data = new DateTime($i.'-'.$mes.'-'.$ano);
+                    $data = $data->format('Y-m-d');
+                    @endphp
+                    @if(in_array($data, $tarefasFiltradas->toArray(), true))
+                    <a class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-info text-white" title="Tarefas" href="{{route('tarefas.tarefasDia', ['dia' => $i])}}">Tarefas do dia {{$i}}</a>
+                    @endif
                 </div>
                 @if(($i+$inicioSemana)%7==0)
                     <div class="w-100"></div>
