@@ -19,6 +19,7 @@ use App\Http\Controllers\PlannerController;
 Route::group(['middleware' => ['auth']], function(){
     Route::prefix('tarefas')->name('tarefas.')->group(function(){
         Route::get('/index', [TarefaController::class, 'index'])->name('index');
+        Route::get('/tarefasDia/{dia}', [TarefaController::class, 'tarefasDia'])->name('tarefasDia');
         Route::post('/salvar', [TarefaController::class, 'salvar'])->name('salvar');
         Route::get('/edit/{id}', [TarefaController::class, 'edit'])->name('edit');
         Route::post('/update', [TarefaController::class, 'update'])->name('update');
