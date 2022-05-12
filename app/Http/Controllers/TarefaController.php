@@ -84,8 +84,8 @@ class TarefaController extends Controller
 
     public function update(Request $request)
     {
-        $inicio = date_create_from_format('H:i', $request->horarioInicio);
-        $fim = date_create_from_format('H:i', $request->horarioFim);
+        $inicio = date_create_from_format('H:i:s', $request->horarioInicio);
+        $fim = date_create_from_format('H:i:s', $request->horarioFim);
 
         $validatedTime = $request->validate([
             'nomeTarefa' => ['required'],
