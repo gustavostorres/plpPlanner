@@ -12,7 +12,7 @@ class Categoria extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'nomeCategoria'
+        'nomeCategoria', 'cor'
     ];
 
     public function tarefas(){

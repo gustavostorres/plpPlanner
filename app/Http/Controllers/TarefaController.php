@@ -14,13 +14,8 @@ class TarefaController extends Controller
 	public function index()
     {
         $tarefas = Tarefa::where('user_id', Auth::user()->id)->get();
-        $categorias = [];
-        // Resgate de apenas as categorias existentes nas tarefas do usuário
-        foreach ($tarefas as $tarefa){
-            if(!in_array($tarefa->categoria->nomeCategoria, $categorias, true)){
-                array_push($categorias,$tarefa->categoria->nomeCategoria);
-            }
-        }
+        $categoriasId = Tarefa::where('user_id', Auth::user()->id)->pluck('categoria_id');
+        $categorias = Categoria::whereIn('id', $categoriasId)->get();
 
         return view('tarefas.index')->with(['categorias'=> $categorias, 'tarefas'=>$tarefas]);
     }
@@ -128,8 +123,8 @@ class TarefaController extends Controller
         $categorias = [];
         // Resgate de apenas as categorias existentes nas tarefas do usuário
         foreach ($tarefas as $tarefa){
-            if(!in_array($tarefa->categoria->nomeCategoria, $categorias, true)){
-                array_push($categorias,$tarefa->categoria->nomeCategoria);
+            if(!in_array($tarefa->categoria, $categorias, true)){
+                array_push($categorias,$tarefa->categoria);
             }
         }
 

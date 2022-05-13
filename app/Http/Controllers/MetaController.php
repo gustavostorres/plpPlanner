@@ -14,13 +14,9 @@ class MetaController extends Controller
 
     public function index(){
         $metas = Meta::where('user_id',Auth::user()->id)->get();
-        $categorias = [];
-        // Resgate de apenas as categorias existentes nas tarefas do usuário
-        foreach ($metas as $meta){
-            if(!in_array($meta->categoria->nomeCategoria, $categorias, true)){
-                array_push($categorias,$meta->categoria->nomeCategoria);
-            }
-        }
+        $categoriasId = Meta::where('user_id', Auth::user()->id)->pluck('categoria_id');
+        $categorias = Categoria::whereIn('id', $categoriasId)->get();
+        
         return view('metas.index')->with(['metas'=> $metas, 'categorias'=> $categorias]);
     }
 
@@ -45,7 +41,6 @@ class MetaController extends Controller
             'descricao'=>$request->descricao, 'categoria_id'=>$request->categoria_id,
             'user_id'=>Auth::user()->id]);
         $meta->save();
-        //$tarefas->metas()->sync([]);
         return redirect(route('metas.index'));
     }
 

@@ -16,28 +16,36 @@ class CategoriaSeeder extends Seeder
     public function run()
     {
         DB::table('categorias')->insert([
-            'nomeCategoria'=> 'Saúde'
+            'nomeCategoria'=> 'Saúde',
+            'cor'=> '#ffebcd'
         ]);
         DB::table('categorias')->insert([
-            'nomeCategoria'=> 'Esportes'
+            'nomeCategoria'=> 'Esportes',
+            'cor'=> '#f08080'
         ]);
         DB::table('categorias')->insert([
-            'nomeCategoria'=> 'Lazer'
+            'nomeCategoria'=> 'Lazer',
+            'cor'=> '#87cefa'
         ]);
         DB::table('categorias')->insert([
-            'nomeCategoria'=> 'Estudo'
+            'nomeCategoria'=> 'Estudo',
+            'cor'=> '#c8a2c8'
         ]);
         DB::table('categorias')->insert([
-            'nomeCategoria'=> 'Trabalho'
+            'nomeCategoria'=> 'Trabalho',
+            'cor'=> '#e4f1cb'
         ]);
         DB::table('categorias')->insert([
-            'nomeCategoria'=> 'Ligações importantes'
+            'nomeCategoria'=> 'Ligações importantes',
+            'cor'=> '#d4e3eb'
         ]);
         DB::table('categorias')->insert([
-            'nomeCategoria'=> 'Reuniões'
+            'nomeCategoria'=> 'Reuniões',
+            'cor'=> '#eac3f9'
         ]);
         DB::table('categorias')->insert([
-            'nomeCategoria'=> 'Compras'
+            'nomeCategoria'=> 'Compras',
+            'cor'=> '#ffffff'
         ]);
     }
 }
