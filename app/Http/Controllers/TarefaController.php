@@ -57,7 +57,7 @@ class TarefaController extends Controller
             $aux = new \DateTime($request->data);
             $tarefa->dataLembrete = $aux->modify('+7 days');
         }
-        
+
     	$tarefas = Tarefa::where('user_id', $tarefa->user_id)->get();
         $tarefa->save();
     	return redirect(route('tarefas.index'));
@@ -111,7 +111,15 @@ class TarefaController extends Controller
     	$tarefa->statusTarefa = $request->statusTarefa;
     	$tarefa->categoria_id = $request->categoria_id;
         $tarefa->lembrete = $request->lembrete;
-    	$tarefa->update();
+
+        if($request->lembrete == true){
+            $aux = new \DateTime($request->data);
+            $tarefa->dataLembrete = $aux->modify('+7 days');
+        }else{
+            $tarefa->dataLembrete = null;
+        }
+
+        $tarefa->update();
         return redirect(route('tarefas.index'));
     }
 
