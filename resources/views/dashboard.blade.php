@@ -39,7 +39,7 @@
                         <a class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-info text-white" title="Tarefas" href="{{route('tarefas.tarefasDia', ['dia' => $i])}}">Tarefas do dia {{$i}}</a>
                     @endif
                     @if(in_array($data, $metaLembrete->toArray(), true))
-                        <a style="background-color: coral" class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small text-white" title="Tarefas" href="{{route('metas.metasDia', ['dia' => $i])}}">Metas do dia {{$i}}</a>
+                        <a style="background-color: coral" class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small text-white" title="Tarefas" href="{{route('metas.metasDia', ['dia' => $i])}}">Metas para o dia {{$i}}</a>
                     @endif
                     @if(in_array($data, $tarefasLembrete->toArray(), true))
                         <a type="button" style="background-color: chartreuse" class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small text-white" title="Lembretes" data-toggle="modal" data-target="#Lembretes{{$i}}">Lembretes</a>
