@@ -12,18 +12,40 @@
             <br>
             @foreach($categorias as $categoria)
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
+                    @if($categoria->nomeCategoria == 'Saúde')
+                    <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
+                    @elseif($categoria->nomeCategoria == 'Esportes') 
+                    <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
+                    @elseif($categoria->nomeCategoria == 'Lazer') 
+                    <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
+                    @elseif($categoria->nomeCategoria == 'Estudo') 
+                    <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
+                    @elseif($categoria->nomeCategoria == 'Trabalho') 
+                    <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};"> 
+                    @elseif($categoria->nomeCategoria == 'Ligações importantes') 
+                    <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
+                    @elseif($categoria->nomeCategoria == 'Reuniões') 
+                    <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};"> 
+                    @else <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};"> 
+                    @endif
                         <h5>
-                            {{$categoria}}
+                            {{$categoria->nomeCategoria}}
                         </h5>
                         @foreach($tarefas as $tarefa)
-                            @if($categoria == $tarefa->categoria->nomeCategoria)
-                                <li>
-                                    {{$tarefa->titulo}}, no turno {{$tarefa->turno}}. Status: {{$tarefa->statusTarefa}}
-                                    <a href="{{route('tarefas.edit', ['id' => $tarefa->id])}}" class="btn btn-primary">Editar tarefa</a>
-                                    <a href="{{route('tarefas.show', ['id' => $tarefa->id])}}" class="btn btn-primary">Mostrar detalhes</a>
-                                    <a href="{{route('tarefas.destroy', ['id' => $tarefa->id])}}" class="btn btn-danger">Apagar</a>
+                            @if($categoria->nomeCategoria == $tarefa->categoria->nomeCategoria)
+                                <ul>
+                                <li><b>Nome:</b> {{$tarefa->titulo}}
+                                <ul>
+                                    <div style="float: right">
+                                        <a href="{{route('tarefas.edit', ['id' => $tarefa->id])}}" class="btn btn-primary">Editar tarefa</a>
+                                        <a href="{{route('tarefas.show', ['id' => $tarefa->id])}}" class="btn btn-primary">Mostrar detalhes</a>
+                                        <a href="{{route('tarefas.destroy', ['id' => $tarefa->id])}}" class="btn btn-danger">Apagar</a>
+                                    </div>
+                                    <li><b>Descrição:</b> {{$tarefa->nomeTarefa}}.</li>
+                                    <li><b>Status:</b> {{$tarefa->statusTarefa}}</li>
+                                </ul>
                                 </li>
+                            </ul>
                             @endif
                         @endforeach
                     </div>
