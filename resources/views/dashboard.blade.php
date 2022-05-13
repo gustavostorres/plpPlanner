@@ -36,7 +36,38 @@
                     $data = $data->format('Y-m-d');
                     @endphp
                     @if(in_array($data, $tarefasFiltradas->toArray(), true))
-                    <a class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-info text-white" title="Tarefas" href="{{route('tarefas.tarefasDia', ['dia' => $i])}}">Tarefas do dia {{$i}}</a>
+                        <a class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-info text-white" title="Tarefas" href="{{route('tarefas.tarefasDia', ['dia' => $i])}}">Tarefas do dia {{$i}}</a>
+                    @endif
+                    @if(in_array($data, $metaLembrete->toArray(), true))
+                        <a style="background-color: coral" class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small text-white" title="Tarefas" href="{{route('metas.metasDia', ['dia' => $i])}}">Metas para o dia {{$i}}</a>
+                    @endif
+                    @if(in_array($data, $tarefasLembrete->toArray(), true))
+                        <a type="button" style="background-color: chartreuse" class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small text-white" title="Lembretes" data-toggle="modal" data-target="#Lembretes{{$i}}">Lembretes</a>
+                        <div class="modal fade" id="Lembretes{{$i}}" tabindex="-1" role="dialog" aria-labelledby="TituloModalLongoExemplo" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="TituloModalLongoExemplo">Lembretes do dia {{$i}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        @php
+                                        $dataaux = new DateTime($i.'-'.$mes.'-'.$ano);
+                                        $tarefas = App\Models\Tarefa::where('user_id', Auth::user()->id)->where('lembrete', true)->whereDay('dataLembrete', $i)
+                                        ->whereMonth('dataLembrete', $dataaux->format('m'))->whereYear('dataLembrete', $dataaux->format('Y'))->get();
+                                        @endphp
+                                        @foreach($tarefas as $tarefa)
+                                        <a class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-info text-white" title="Tarefas" href="{{route('tarefas.show', ['id' => $tarefa->id])}}">{{$tarefa->titulo}}</a>
+                                        @endforeach
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endif
                 </div>
                 @if(($i+$inicioSemana)%7==0)

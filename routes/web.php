@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/create', [MetaController::class, 'create'])->name('create');
         Route::post('/salvar', [MetaController::class, 'salvar'])->name('salvar');
         Route::get('/edit/{id}', [MetaController::class, 'edit'])->name('edit');
+        Route::get('/metasDia/{dia}', [MetaController::class, 'metasDia'])->name('metasDia');
         Route::post('/update', [MetaController::class, 'update'])->name('update');
         Route::get('/show/{id}', [MetaController::class, 'show'])->name('show');
         Route::get('/destroy/{id}', [MetaController::class, 'destroy'])->name('destroy');
