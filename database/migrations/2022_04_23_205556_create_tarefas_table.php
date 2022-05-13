@@ -17,6 +17,7 @@ class CreateTarefasTable extends Migration
             $table->id();
             $table->enum('statusTarefa',['executada','parcialmenteExecutada','adiada', 'naoIniciado']);
             $table->date('data')->nullable();
+            $table->date('dataLembrete')->nullable();
             $table->time('horarioInicio')->nullable();
             $table->time('horarioFim')->nullable();
             $table->string('nomeTarefa');
