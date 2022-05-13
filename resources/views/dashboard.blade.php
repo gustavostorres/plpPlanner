@@ -100,7 +100,7 @@
 
     @media (min-width: 576px) {
         .day {
-            height: 6.380vw;
+            height: 11.000vw;
         }
     }
 </style>
