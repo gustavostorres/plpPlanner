@@ -1,11 +1,11 @@
 <x-app-layout>
     <div class="container-fluid" style="margin-top: 25px">
         <header>
-            <div class="row justify-content-center">
-                <a type="button" style="margin-top: 10px;margin-right: 25px"
-                   href="{{route('alterarMes', ['mes' => $mes,'ano'=>$ano,'sinal'=>0])}}"><img class="" src="{{asset('img/setaEsquerda.png')}}" style="width:50px" alt=""></a>
+            <div class="row justify-content-end">
                 <h4 class="display-4 mb-4 text-center">{{$mes}}, {{$ano}}</h4>
-                <a type="button" style="margin-top: 10px;margin-left: 25px"
+                <a type="button"
+                   href="{{route('alterarMes', ['mes' => $mes,'ano'=>$ano,'sinal'=>0])}}"><img class="" src="{{asset('img/setaEsquerda.png')}}" style="width:50px" alt=""></a>
+                <a type="button"
                    href="{{route('alterarMes', ['mes' => $mes,'ano'=>$ano,'sinal'=>1])}}"><img class="" src="{{asset('img/setaDireita.png')}}" style="width:50px" alt=""></a>
             </div>
             <div class="row d-none d-sm-flex p-1 bg-dark text-white">
