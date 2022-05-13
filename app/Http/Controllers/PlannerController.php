@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Meta;
 use Illuminate\Http\Request;
 use App\Models\Tarefa;
 use Illuminate\Support\Facades\Auth;
@@ -25,10 +26,15 @@ class PlannerController extends Controller
 
     public function gerarPlanner(){
         $data = new DateTime();
+        $dataLembrete = new DateTime();
+        $dataFinalMeta = new DateTime();
         $data_incio = mktime(0, 0, 0, $data->format('m') , 1 , $data->format('Y'));
         $tarefasFiltradas = Tarefa::where('user_id', Auth::user()->id)->whereYear('data', '=', $data->format('Y'))->whereMonth('data', '=', $data->format('m'))->pluck('data');
+        $tarefasLembrete = Tarefa::where('user_id', Auth::user()->id)->whereYear('dataLembrete', '=', $dataLembrete->format('Y'))->whereMonth('dataLembrete', '=', $dataLembrete->format('m'))->pluck('dataLembrete');
+        $metaLembrete = Meta::where('user_id', Auth::user()->id)->whereYear('dataFinalMeta', '=', $dataLembrete->format('Y'))->whereMonth('dataFinalMeta', '=', $dataLembrete->format('m'))->pluck('dataFinalMeta');
 
-        return view('dashboard')->with(["mes"=>$data->format('F'),"ano"=>$data->format('Y'),"dias"=>$data->format('t'),"inicioSemana"=>date('w',$data_incio),"tarefasFiltradas"=>$tarefasFiltradas]);
+        return view('dashboard')->with(["mes"=>$data->format('F'),"ano"=>$data->format('Y'),"dias"=>$data->format('t'),"inicioSemana"=>date('w',$data_incio),
+            "tarefasFiltradas"=>$tarefasFiltradas, "tarefasLembrete"=>$tarefasLembrete, "metaLembrete"=>$metaLembrete]);
     }
 
 }

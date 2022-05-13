@@ -103,4 +103,17 @@ class MetaController extends Controller
         return view('metas.registraTarefa')->with(['tarefas'=>$tarefas, 'meta'=>$meta]);
     }
 
+    public function metasDia($dia){
+        $metas = Meta::where('user_id', Auth::user()->id)->whereDay('dataFinalMeta',' =', $dia)->get();
+        $categorias = [];
+        // Resgate de apenas as categorias existentes nas tarefas do usuário
+        foreach ($metas as $meta){
+            if(!in_array($meta->categoria->nomeCategoria, $categorias, true)){
+                array_push($categorias,$meta->categoria->nomeCategoria);
+            }
+        }
+
+        return view('metas.metasDia')->with(['categorias'=> $categorias, 'metas'=>$metas]);
+    }
+
 }
