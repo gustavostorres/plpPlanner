@@ -21,6 +21,11 @@ class RelatorioController extends Controller
         //$dataInicial = new DateTime($request->dataInicial);
         //$dataFinal = new DateTime($request->dataFinal);
         //Categorias de metas mais realizadas
+        $validatedTime = $request->validate([
+            'dataInicial' => ['required','date'],
+            'dataFinal' => ['required','date','after_or_equal:dataInicial'],
+            'tipo' => ['required'],
+        ]);
         if ($request->tipo == 1 || $request->tipo == 4) {
             return $this->categoriaMetasRealizadas($request);
         } elseif ($request->tipo == 2 || $request->tipo == 5) {
@@ -39,9 +44,9 @@ class RelatorioController extends Controller
             $categoria->porcentagem = ($categoria->quantidade / $quantGeral) * 100;
         }
         if ($request->tipo == 1) {
-            return view('relatorio.categoriaMetaRealizada')->with(['categorias' => $categorias, 'metas' => $metas->get()]);
+            return view('relatorio.categoriaMetaRealizada')->with(['categorias' => $categorias, 'metas' => $metas->get(),'dataInicial'=>$request->dataInicial,'dataFinal'=>$request->dataFinal]);
         }
-        return view('relatorio.quantMetaCumprida')->with(['categorias' => $categorias, 'metas' => $metas->get()]);
+        return view('relatorio.quantMetaCumprida')->with(['categorias' => $categorias, 'metas' => $metas->get(),'dataInicial'=>$request->dataInicial,'dataFinal'=>$request->dataFinal]);
     }
 
     public function categoriaTarefasRealizadas(Request $request)
@@ -54,8 +59,8 @@ class RelatorioController extends Controller
             $categoria->porcentagem = round((($categoria->quantidade / $quantGeral) * 100),2);
         }
         if ($request->tipo == 2) {
-            return view('relatorio.categoriaTarefaRealizada')->with(['categorias' => $categorias, 'tarefas' => $tarefas->get()]);
+            return view('relatorio.categoriaTarefaRealizada')->with(['categorias' => $categorias, 'tarefas' => $tarefas->get(),'dataInicial'=>$request->dataInicial,'dataFinal'=>$request->dataFinal]);
         }
-        return view('relatorio.quantTarefaCumprida')->with(['categorias' => $categorias, 'tarefas' => $tarefas->get()]);
+        return view('relatorio.quantTarefaCumprida')->with(['categorias' => $categorias, 'tarefas' => $tarefas->get(),'dataInicial'=>$request->dataInicial,'dataFinal'=>$request->dataFinal]);
     }
 }
