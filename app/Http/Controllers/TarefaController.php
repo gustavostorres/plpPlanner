@@ -28,8 +28,8 @@ class TarefaController extends Controller
 
     public function salvar(Request $request)
     {
-        $inicio = date_create_from_format('H:i', $request->horarioInicio);
-        $fim = date_create_from_format('H:i', $request->horarioFim);
+        $inicio = new \DateTime($request->horarioInicio);
+        $fim = new \DateTime($request->horarioFim);
         $validatedTime = $request->validate([
             'nomeTarefa' => ['required'],
             'titulo' => ['required','string'],
@@ -57,10 +57,10 @@ class TarefaController extends Controller
         $tarde = new \DateTime('13:00:00');
         $noite = new \DateTime('19:00:00');
 
-        if($request->horarioInicio >= $manha && $request->horarioFim < $tarde){
+        if($inicio >= $manha && $fim < $tarde){
             $auxTurno = 'Manha';
             $tarefa->turno = $auxTurno;
-        }else if($request->horarioInicio >= $tarde && $request->horarioFim < $noite){
+        }else if($inicio >= $tarde && $fim < $noite){
             $auxTurno = 'Tarde';
             $tarefa->turno = $auxTurno;
         }else{
@@ -95,9 +95,8 @@ class TarefaController extends Controller
 
     public function update(Request $request)
     {
-        $inicio = date_create_from_format('H:i:s', $request->horarioInicio);
-        $fim = date_create_from_format('H:i:s', $request->horarioFim);
-
+        $inicio = new \DateTime($request->horarioInicio);
+        $fim = new \DateTime($request->horarioFim);
         $validatedTime = $request->validate([
             'nomeTarefa' => ['required'],
             'titulo' => ['required','string'],
@@ -129,13 +128,17 @@ class TarefaController extends Controller
             $tarefa->dataLembrete = null;
         }
 
-        if($request->horarioInicio >= '08:00' && $request->horarioFim <= '12:59'){
+        $manha = new \DateTime('06:00:00');
+        $tarde = new \DateTime('13:00:00');
+        $noite = new \DateTime('19:00:00');
+
+        if($inicio >= $manha && $fim < $tarde){
             $auxTurno = 'Manha';
             $tarefa->turno = $auxTurno;
-        }else if($request->horarioInicio >= '13:00' && $request->horarioFim <= '18:59'){
+        }else if($inicio >= $tarde && $fim < $noite){
             $auxTurno = 'Tarde';
             $tarefa->turno = $auxTurno;
-        }else if($request->horarioInicio >= '19:00' && $request->horarioFim <= '07:59'){
+        }else{
             $auxTurno = 'Noite';
             $tarefa->turno = $auxTurno;
         }
