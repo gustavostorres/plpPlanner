@@ -22,7 +22,8 @@
                     <label for="titulo">Titulo: {{$tarefa->titulo}} </label><br>
                     <label for="nomeTarefa">Descrição: {{$tarefa->nomeTarefa}} </label><br>
                     <label for="dataTarefa">Data: {{$tarefa->data}} </label><br>
-                    <label for="turno">Horário: entre {{$tarefa->horarioInicio}} e {{$tarefa->horarioFim}} </label><br>
+                    <label for="horario">Horário: entre {{$tarefa->horarioInicio}} e {{$tarefa->horarioFim}} </label><br>
+                    <label for="turno">Turno: {{$tarefa->turno}}</label><br>
                     <label for="statusTarefa">Status: {{$tarefa->statusTarefa}} </label><br>
                     <a href="{{url()->previous()}}" class="btn btn-primary" type="button">Voltar</a><br>
                 </div>
