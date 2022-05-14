@@ -63,7 +63,7 @@
                     </form>
                     <hr>
 
-                    @foreach($categorias as $categoria)
+                    @foreach(array_reverse($categorias) as $categoria)
                         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg meta" id="{{$categoria->nomeCategoria}}">
                             @if($categoria->nomeCategoria == 'Saúde')
                                 <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
