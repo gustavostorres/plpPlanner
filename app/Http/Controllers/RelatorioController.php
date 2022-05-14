@@ -23,7 +23,9 @@ class RelatorioController extends Controller
         //Categorias de metas mais realizadas
         if ($request->tipo == 1) {
             return $this->categoriaMetasRealizadas($request);
-        } 
+        } elseif ($request->tipo == 2) {
+            return $this->categoriaTarefasRealizadas($request);
+        }
 
     }
 
@@ -39,5 +41,15 @@ class RelatorioController extends Controller
         return view('relatorio.categoriaMetaRealizada')->with(['categorias' => $categorias, 'metas' => $metas->get()]);
     }
 
-
+    public function categoriaTarefasRealizadas(Request $request)
+    {
+        $tarefas = Tarefa::where("user_id", Auth::user()->id)->where("statusTarefa", "executada")->whereDate('data', '>=', $request->dataInicial)->whereDate('data', '<=', $request->dataFinal);
+        $categorias = Categoria::wherein("id", $tarefas->pluck("categoria_id"))->get();
+        $quantGeral = Tarefa::all()->count();
+        foreach ($categorias as $categoria) {
+            $categoria->quantidade = Tarefa::where("user_id", Auth::user()->id)->where("statusTarefa", "executada")->whereDate('data', '>=', $request->dataInicial)->whereDate('data', '<=', $request->dataFinal)->where("categoria_id", $categoria->id)->get()->count();
+            $categoria->porcentagem = round((($categoria->quantidade / $quantGeral) * 100),2);
+        }
+        return view('relatorio.categoriaTarefaRealizada')->with(['categorias' => $categorias, 'tarefas' => $tarefas->get()]);
+    }
 }
