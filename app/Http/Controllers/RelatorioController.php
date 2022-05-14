@@ -21,6 +21,11 @@ class RelatorioController extends Controller
         //$dataInicial = new DateTime($request->dataInicial);
         //$dataFinal = new DateTime($request->dataFinal);
         //Categorias de metas mais realizadas
+        $validatedTime = $request->validate([
+            'dataInicial' => ['required','date'],
+            'dataFinal' => ['required','date','after_or_equal:dataInicial'],
+            'tipo' => ['required'],
+        ]);
         if ($request->tipo == 1 || $request->tipo == 4) {
             return $this->categoriaMetasRealizadas($request);
         } elseif ($request->tipo == 2 || $request->tipo == 5) {

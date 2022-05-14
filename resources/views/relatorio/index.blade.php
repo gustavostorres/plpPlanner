@@ -42,7 +42,7 @@
                                 <label for="tipo">Relatorio:</label><br>
                             </div>
                             <div class="col-md-4" style="padding-left: 0px">
-                                <select name="tipo" id="tipo" class="form-control ">
+                                <select name="tipo" id="tipo" class="form-control @error('tipo') is-invalid @enderror">
                                     <option value="" disabled selected hidden>Selecione um Relatório</option>
                                     <option value="1">Categorias de metas mais realizadas</option>
                                     <option value="2">Categorias de tarefas mais realizadas</option>
@@ -51,6 +51,11 @@
                                     <option value="5">Quant. e Porcentagem de tarefas executada</option>
                                     <option value="6">Destacar semanas e meses mais produtivos</option>
                                 </select>
+                                @error('tipo')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="col-md-1 justify-content-center">
                                 <button type="submit" class="btn btn-primary">Gerar</button>
