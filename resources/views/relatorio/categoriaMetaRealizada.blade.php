@@ -77,14 +77,7 @@
                             @else
                                 <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
                             @endif
-                            <h5>{{$categoria->nomeCategoria}} - Quantidade: {{$categoria->quantidade}} - Porcentagem: {{$categoria->porcentagem}}%</h5>
-                            @foreach($metas as $meta)
-                                @if($categoria->nomeCategoria == $meta->categoria->nomeCategoria)
-                                    <ul class="status" id="{{$meta->statusMeta}}">
-                                        <li><b>Nome meta:</b> {{$meta->nomeMeta}}</li>
-                                   </ul>
-                                   @endif
-                            @endforeach
+                            <h5>{{$categoria->nomeCategoria}} - Quantidade: {{$categoria->quantidade}}</h5>
                             </div>
                         </div>
                         <br>

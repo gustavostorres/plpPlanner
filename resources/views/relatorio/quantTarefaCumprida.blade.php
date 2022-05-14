@@ -77,7 +77,14 @@
                             @else
                                 <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
                             @endif
-                            <h5>{{$categoria->nomeCategoria}} - Quantidade: {{$categoria->quantidade}}</h5>
+                            <h5>{{$categoria->nomeCategoria}} - Quantidade: {{$categoria->quantidade}} - Porcentagem: {{$categoria->porcentagem}}%</h5>
+                            @foreach($tarefas as $tarefa)
+                                @if($categoria->nomeCategoria == $tarefa->categoria->nomeCategoria)
+                                    <ul class="status" id="{{$tarefa->statusTarefa}}">
+                                        <li><b>Nome tarefa:</b> {{$tarefa->nomeTarefa}}</li>
+                                   </ul>
+                                   @endif
+                            @endforeach
                             </div>
                         </div>
                         <br>

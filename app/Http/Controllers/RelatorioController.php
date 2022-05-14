@@ -21,9 +21,9 @@ class RelatorioController extends Controller
         //$dataInicial = new DateTime($request->dataInicial);
         //$dataFinal = new DateTime($request->dataFinal);
         //Categorias de metas mais realizadas
-        if ($request->tipo == 1) {
+        if ($request->tipo == 1 || $request->tipo == 4) {
             return $this->categoriaMetasRealizadas($request);
-        } elseif ($request->tipo == 2) {
+        } elseif ($request->tipo == 2 || $request->tipo == 5) {
             return $this->categoriaTarefasRealizadas($request);
         }
 
@@ -38,7 +38,10 @@ class RelatorioController extends Controller
             $categoria->quantidade = Meta::where("user_id", Auth::user()->id)->where("statusMeta", "comSucesso")->whereDate('dataMeta', '>=', $request->dataInicial)->whereDate('dataMeta', '<=', $request->dataFinal)->where("categoria_id", $categoria->id)->get()->count();
             $categoria->porcentagem = ($categoria->quantidade / $quantGeral) * 100;
         }
-        return view('relatorio.categoriaMetaRealizada')->with(['categorias' => $categorias, 'metas' => $metas->get()]);
+        if ($request->tipo == 1) {
+            return view('relatorio.categoriaMetaRealizada')->with(['categorias' => $categorias, 'metas' => $metas->get()]);
+        }
+        return view('relatorio.quantMetaCumprida')->with(['categorias' => $categorias, 'metas' => $metas->get()]);
     }
 
     public function categoriaTarefasRealizadas(Request $request)
@@ -50,6 +53,9 @@ class RelatorioController extends Controller
             $categoria->quantidade = Tarefa::where("user_id", Auth::user()->id)->where("statusTarefa", "executada")->whereDate('data', '>=', $request->dataInicial)->whereDate('data', '<=', $request->dataFinal)->where("categoria_id", $categoria->id)->get()->count();
             $categoria->porcentagem = round((($categoria->quantidade / $quantGeral) * 100),2);
         }
-        return view('relatorio.categoriaTarefaRealizada')->with(['categorias' => $categorias, 'tarefas' => $tarefas->get()]);
+        if ($request->tipo == 2) {
+            return view('relatorio.categoriaTarefaRealizada')->with(['categorias' => $categorias, 'tarefas' => $tarefas->get()]);
+        }
+        return view('relatorio.quantTarefaCumprida')->with(['categorias' => $categorias, 'tarefas' => $tarefas->get()]);
     }
 }

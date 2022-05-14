@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    {{Auth::user()->name}}, bem vindo a sua página de relatórios TAREFAAA!
+                    {{Auth::user()->name}}, bem vindo a sua página de relatóriossss!
                 </div>
                 <div class="container" style="margin-top: 10px">
                     <form method="POST" action="{{route("relatorios.gerar")}}">
@@ -77,7 +77,14 @@
                             @else
                                 <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
                             @endif
-                            <h5>{{$categoria->nomeCategoria}} - Quantidade: {{$categoria->quantidade}}</h5>
+                            <h5>{{$categoria->nomeCategoria}} - Quantidade: {{$categoria->quantidade}} - Porcentagem: {{$categoria->porcentagem}}%</h5>
+                            @foreach($metas as $meta)
+                                @if($categoria->nomeCategoria == $meta->categoria->nomeCategoria)
+                                    <ul class="status" id="{{$meta->statusMeta}}">
+                                        <li><b>Nome meta:</b> {{$meta->nomeMeta}}</li>
+                                   </ul>
+                                   @endif
+                            @endforeach
                             </div>
                         </div>
                         <br>
