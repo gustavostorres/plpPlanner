@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use DateTime;
 use Illuminate\Support\Arr;
 
+
 class RelatorioController extends Controller
 {
     public function index()
@@ -31,6 +32,8 @@ class RelatorioController extends Controller
             return $this->categoriaMetasRealizadas($request);
         } elseif ($request->tipo == 2 || $request->tipo == 5) {
             return $this->categoriaTarefasRealizadas($request);
+        } else if($request->tipo == 3){
+            return $this->turnoProdutivo($request);
         }
 
     }
@@ -91,5 +94,20 @@ class RelatorioController extends Controller
 
     public function mesesProdutivos(Request $request){
 
+    }
+
+    public function turnoProdutivo(Request $request){
+        $tarefas = Tarefa::where("user_id", Auth::user()->id)->where("statusTarefa", "executada")->whereDate('data', '>=', $request->dataInicial)->whereDate('data', '<=', $request->dataFinal);
+        $turnos = $tarefas->select('turno')->distinct()->get();
+
+        foreach ($turnos as $turno) {
+            $turno->quantidade = Tarefa::where("user_id", Auth::user()->id)->where("statusTarefa", "executada")->whereDate('data', '>=', $request->dataInicial)->whereDate('data', '<=', $request->dataFinal)->where('turno', $turno->turno)->get()->count();
+        }
+
+        $turnos = Arr::sort($turnos, function($turno)
+        {
+            return $turno->quantidade;
+        });
+        return view('relatorio.turnoProdutivo')->with(['turnos' => $turnos, 'tarefas' => $tarefas->get(),'dataInicial'=>$request->dataInicial,'dataFinal'=>$request->dataFinal,'tipo' =>$request->tipo]);
     }
 }

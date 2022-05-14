@@ -50,7 +50,22 @@ class TarefaController extends Controller
 
         if($request->lembrete == true){
             $aux = new \DateTime($request->data);
-            $tarefa->dataLembrete = $aux->modify('+7 days');
+            $tarefa->dataLembrete = $aux->modify('-7 days');
+        }
+
+        $manha = new \DateTime('06:00:00');
+        $tarde = new \DateTime('13:00:00');
+        $noite = new \DateTime('19:00:00');
+
+        if($request->horarioInicio >= $manha && $request->horarioFim < $tarde){
+            $auxTurno = 'Manha';
+            $tarefa->turno = $auxTurno;
+        }else if($request->horarioInicio >= $tarde && $request->horarioFim < $noite){
+            $auxTurno = 'Tarde';
+            $tarefa->turno = $auxTurno;
+        }else{
+            $auxTurno = 'Noite';
+            $tarefa->turno = $auxTurno;
         }
 
     	$tarefas = Tarefa::where('user_id', $tarefa->user_id)->get();
@@ -112,6 +127,17 @@ class TarefaController extends Controller
             $tarefa->dataLembrete = $aux->modify('+7 days');
         }else{
             $tarefa->dataLembrete = null;
+        }
+
+        if($request->horarioInicio >= '08:00' && $request->horarioFim <= '12:59'){
+            $auxTurno = 'Manha';
+            $tarefa->turno = $auxTurno;
+        }else if($request->horarioInicio >= '13:00' && $request->horarioFim <= '18:59'){
+            $auxTurno = 'Tarde';
+            $tarefa->turno = $auxTurno;
+        }else if($request->horarioInicio >= '19:00' && $request->horarioFim <= '07:59'){
+            $auxTurno = 'Noite';
+            $tarefa->turno = $auxTurno;
         }
 
         $tarefa->update();

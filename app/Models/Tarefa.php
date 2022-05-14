@@ -12,7 +12,8 @@ class Tarefa extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'statusTarefa', 'data', 'dataLembrete','titulo', 'nomeTarefa', 'categoria_id', 'user_id', 'horarioFim', 'horarioInicio', 'lembrete'
+        'statusTarefa', 'data', 'dataLembrete','titulo', 'nomeTarefa', 'categoria_id', 'user_id', 'horarioFim', 'horarioInicio',
+        'lembrete', 'turno'
     ];
 
     public function categoria(){
