@@ -36,19 +36,19 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg meta" id="{{$categoria->nomeCategoria}}">
                     @if($categoria->nomeCategoria == 'Saúde')
                     <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
-                    @elseif($categoria->nomeCategoria == 'Esportes') 
+                    @elseif($categoria->nomeCategoria == 'Esportes')
                     <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
-                    @elseif($categoria->nomeCategoria == 'Lazer') 
+                    @elseif($categoria->nomeCategoria == 'Lazer')
                     <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
-                    @elseif($categoria->nomeCategoria == 'Estudo') 
+                    @elseif($categoria->nomeCategoria == 'Estudo')
                     <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
-                    @elseif($categoria->nomeCategoria == 'Trabalho') 
-                    <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};"> 
-                    @elseif($categoria->nomeCategoria == 'Ligações importantes') 
+                    @elseif($categoria->nomeCategoria == 'Trabalho')
                     <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
-                    @elseif($categoria->nomeCategoria == 'Reuniões') 
-                    <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};"> 
-                    @else <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};"> 
+                    @elseif($categoria->nomeCategoria == 'Ligações importantes')
+                    <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
+                    @elseif($categoria->nomeCategoria == 'Reuniões')
+                    <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
+                    @else <div class="p-6 border-b border-gray-200" style="background-color: {{$categoria->cor}};">
                     @endif
                         <h5>
                             {{$categoria->nomeCategoria}}
