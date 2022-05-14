@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TarefaController;
 use App\Http\Controllers\MetaController;
 use App\Http\Controllers\PlannerController;
+use App\Http\Controllers\RelatorioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,11 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/destroy/{id}', [MetaController::class, 'destroy'])->name('destroy');
         Route::post('/registrar/tarefa', [MetaController::class, 'registrarTarefa'])->name('registrar.tarefa');
         Route::get('/cadastrar/{id}', [MetaController::class, 'cadastrar'])->name('cadastrar.tarefa');
+    });
+
+    Route::prefix('relatorios')->name('relatorios.')->group(function() {
+        Route::get('/', [RelatorioController::class, 'index'])->name('index');
+        
     });
 
     Route::get('/planner/{mes}/{ano}/{sinal}', [PlannerController::class, 'alterarMes'])->name('alterarMes');
