@@ -22,6 +22,7 @@ class CreateTarefasTable extends Migration
             $table->time('horarioFim')->nullable();
             $table->string('nomeTarefa');
             $table->string('titulo');
+            $table->string('turno')->nullable();
             $table->boolean('lembrete')->nullable();
             $table->unsignedBigInteger('categoria_id');
             $table->unsignedBigInteger('user_id');
