@@ -65,9 +65,9 @@ class RelatorioController extends Controller
         });
 
         if ($request->tipo == 1) {
-            return view('relatorio.categoriaMetaRealizada')->with(['categorias' => $categorias, 'metas' => $metas->get(),'dataInicial'=>$request->dataInicial,'dataFinal'=>$request->dataFinal]);
+            return view('relatorio.categoriaMetaRealizada')->with(['categorias' => $categorias, 'metas' => $metas->get(),'dataInicial'=>$request->dataInicial,'dataFinal'=>$request->dataFinal,'tipo' =>$request->tipo]);
         }
-        return view('relatorio.quantMetaCumprida')->with(['categorias' => $categorias, 'metas' => $metas->get(),'dataInicial'=>$request->dataInicial,'dataFinal'=>$request->dataFinal]);
+        return view('relatorio.quantMetaCumprida')->with(['categorias' => $categorias, 'metas' => $metas->get(),'dataInicial'=>$request->dataInicial,'dataFinal'=>$request->dataFinal,'tipo' =>$request->tipo]);
     }
 
     public function categoriaTarefasRealizadas(Request $request)
@@ -84,8 +84,12 @@ class RelatorioController extends Controller
             return $categoria->quantidade;
         });
         if ($request->tipo == 2) {
-            return view('relatorio.categoriaTarefaRealizada')->with(['categorias' => $categorias, 'tarefas' => $tarefas->get(),'dataInicial'=>$request->dataInicial,'dataFinal'=>$request->dataFinal]);
+            return view('relatorio.categoriaTarefaRealizada')->with(['categorias' => $categorias, 'tarefas' => $tarefas->get(),'dataInicial'=>$request->dataInicial,'dataFinal'=>$request->dataFinal,'tipo' =>$request->tipo]);
         }
-        return view('relatorio.quantTarefaCumprida')->with(['categorias' => $categorias, 'tarefas' => $tarefas->get(),'dataInicial'=>$request->dataInicial,'dataFinal'=>$request->dataFinal]);
+        return view('relatorio.quantTarefaCumprida')->with(['categorias' => $categorias, 'tarefas' => $tarefas->get(),'dataInicial'=>$request->dataInicial,'dataFinal'=>$request->dataFinal,'tipo' =>$request->tipo]);
+    }
+
+    public function mesesProdutivos(Request $request){
+
     }
 }

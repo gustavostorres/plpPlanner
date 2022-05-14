@@ -43,12 +43,12 @@
                             </div>
                             <div class="col-md-4" style="padding-left: 0px">
                                 <select name="tipo" id="tipo" class="form-control @error('tipo') is-invalid @enderror">
-                                    <option value="1">Categorias de metas mais realizadas</option>
-                                    <option value="2">Categorias de tarefas mais realizadas</option>
-                                    <option value="3">Destacar turnos mais produtivos</option>
-                                    <option value="4">Quant. e Porcentagem de metas cumpridas</option>
-                                    <option value="5">Quant. e Porcentagem de tarefas executada</option>
-                                    <option value="6">Destacar semanas e meses mais produtivos</option>
+                                    <option value="1" @if($tipo==1) selected @endif>Categorias de metas mais realizadas</option>
+                                    <option value="2" @if($tipo==2) selected @endif>Categorias de tarefas mais realizadas</option>
+                                    <option value="3" @if($tipo==3) selected @endif>Destacar turnos mais produtivos</option>
+                                    <option value="4" @if($tipo==4) selected @endif>Quant. e Porcentagem de metas cumpridas</option>
+                                    <option value="5" @if($tipo==5) selected @endif>Quant. e Porcentagem de tarefas executada</option>
+                                    <option value="6" @if($tipo==6) selected @endif>Destacar semanas e meses mais produtivos</option>
                                 </select>
                                 @error('tipo')
                                 <span class="invalid-feedback" role="alert">
