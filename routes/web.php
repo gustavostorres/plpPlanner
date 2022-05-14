@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::prefix('relatorios')->name('relatorios.')->group(function() {
         Route::get('/', [RelatorioController::class, 'index'])->name('index');
-        
+        Route::post('/gerar', [RelatorioController::class, 'gerar'])->name('gerar');
     });
 
     Route::get('/planner/{mes}/{ano}/{sinal}', [PlannerController::class, 'alterarMes'])->name('alterarMes');
