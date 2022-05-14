@@ -8,14 +8,14 @@
                 <div class="container" style="margin-top: 10px">
                     <form method="POST" action="{{route("relatorios.gerar")}}">
                         @csrf
-                        <div class="row">
+                        <div class="row" style="margin-bottom: 10px">
                             <div class="col-md-1" style="padding-right: 0px;padding-left: 0px">
                                 <label for="data">Data Inicial:</label><br>
                             </div>
                             <div class="col-md-2">
                                 <input type="date" name="dataInicial"
                                        class="form-control  @error('dataInicial') is-invalid @enderror"
-                                       value="{{old('dataInicial')}}">
+                                       value="{{$dataInicial}}">
                                 @error('dataInicial')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -29,7 +29,7 @@
                             <div class="col-md-2">
                                 <input type="date" name="dataFinal"
                                        class="form-control  @error('dataFinal') is-invalid @enderror"
-                                       value="{{old('dataFinal')}}">
+                                       value="{{$dataFinal}}">
                                 @error('dataFinal')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

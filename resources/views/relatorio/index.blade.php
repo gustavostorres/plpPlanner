@@ -8,7 +8,7 @@
                 <div class="container" style="margin-top: 10px">
                     <form method="POST" action="{{route("relatorios.gerar")}}">
                         @csrf
-                        <div class="row">
+                        <div class="row" style="margin-bottom: 10px">
                             <div class="col-md-1" style="padding-right: 0px;padding-left: 0px">
                                 <label for="data">Data Inicial:</label><br>
                             </div>
@@ -43,6 +43,7 @@
                             </div>
                             <div class="col-md-4" style="padding-left: 0px">
                                 <select name="tipo" id="tipo" class="form-control ">
+                                    <option value="" disabled selected hidden>Selecione um Relatório</option>
                                     <option value="1">Categorias de metas mais realizadas</option>
                                     <option value="2">Categorias de tarefas mais realizadas</option>
                                     <option value="3">Destacar turnos mais produtivos</option>
