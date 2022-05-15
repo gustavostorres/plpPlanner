@@ -147,7 +147,7 @@ class RelatorioController extends Controller
         }
     }
 
-    public function gerarSemanas(Request $request,$data, $tarefas)
+    public function gerarSemanas(Request $request,$data)
     {
         foreach ($data->meses as $mes) {
             $dataInicio = new DateTime('01-' . $mes->mes . '-' . $data->ano);
@@ -157,9 +157,7 @@ class RelatorioController extends Controller
             while ($mesAux == $dataInicio->format('m')) {
                 $cont = 0;
                 for ($i = $dataInicio->format('w'); $i <= 6 && $mesAux == $dataInicio->format('m'); $i++) {
-                    if (Tarefa::where("user_id", Auth::user()->id)->where("statusTarefa", "executada")->whereDate('data', '>=', $request->dataInicial)->whereDate('data', '<=', $request->dataFinal)->where('data', $dataInicio)->get()->count() > 0){
-                        $cont++;
-                    }
+                    $cont+=Tarefa::where("user_id", Auth::user()->id)->where("statusTarefa", "executada")->where('data', $dataInicio)->get()->count();
                     $dataInicio->modify('+1 day');
                 }
                 $aux = new \stdClass();
@@ -179,7 +177,7 @@ class RelatorioController extends Controller
         $anos = $this->gerarAnos($request);
         $this->gerarMeses($request, $anos);
         foreach ($anos as $ano) {
-            $this->gerarSemanas($request,$ano, $tarefas);
+            $this->gerarSemanas($request,$ano);
         }
     }
 
