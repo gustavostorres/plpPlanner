@@ -25,7 +25,7 @@
                 </div>
             @endfor
             @for ($i = 1; $i <= $dias; $i++)
-                <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate">
+                <div class="day col-sm p-2 border border-right-0 border-bottom-0 text-truncate">
                     <h5 class="row align-items-center">
                         <span class="date col-1">{{$i}}</span>
                         <small class="col d-sm-none text-center text-muted">{{$i}}</small>
@@ -42,7 +42,7 @@
                         <a style="background-color: coral" class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small text-white" title="Tarefas" href="{{route('metas.metasDia', ['dia' => $i])}}">Metas para o dia {{$i}}</a>
                     @endif
                     @if(in_array($data, $tarefasLembrete->toArray(), true))
-                        <a type="button" style="background-color: chartreuse" class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small text-white" title="Lembretes" data-toggle="modal" data-target="#Lembretes{{$i}}">Lembretes</a>
+                        <a type="button" style="background-color: #fa608b" class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small text-white" title="Lembretes" data-toggle="modal" data-target="#Lembretes{{$i}}">Lembretes</a>
                         <div class="modal fade" id="Lembretes{{$i}}" tabindex="-1" role="dialog" aria-labelledby="TituloModalLongoExemplo" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
