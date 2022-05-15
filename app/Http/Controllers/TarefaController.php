@@ -123,7 +123,7 @@ class TarefaController extends Controller
 
         if($request->lembrete == true){
             $aux = new \DateTime($request->data);
-            $tarefa->dataLembrete = $aux->modify('+7 days');
+            $tarefa->dataLembrete = $aux->modify('-7 days');
         }else{
             $tarefa->dataLembrete = null;
         }
@@ -149,13 +149,8 @@ class TarefaController extends Controller
 
     public function tarefasDia($dia){
         $tarefas = Tarefa::where('user_id', Auth::user()->id)->whereDay('data',' =', $dia)->get();
-        $categorias = [];
-        // Resgate de apenas as categorias existentes nas tarefas do usuário
-        foreach ($tarefas as $tarefa){
-            if(!in_array($tarefa->categoria, $categorias, true)){
-                array_push($categorias,$tarefa->categoria);
-            }
-        }
+        $categoriasId = Tarefa::where('user_id', Auth::user()->id)->whereDay('data',' =', $dia)->pluck('categoria_id');
+        $categorias = Categoria::whereIn('id', $categoriasId)->get();
 
         return view('tarefas.tarefasDia')->with(['categorias'=> $categorias, 'tarefas'=>$tarefas]);
     }
