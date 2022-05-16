@@ -19,13 +19,13 @@
             </div>
         </header>
 
-        <div class="row border border-right-0 border-bottom-0">
+        <div class="row border border-left-0 border-bottom-0">
             @for ($i = 0; $i <$inicioSemana; $i++)
                 <div class="day col-sm p-2 text-truncate">
                 </div>
             @endfor
             @for ($i = 1; $i <= $dias; $i++)
-                <div class="day col-sm p-2 border border-right-0 border-bottom-0 text-truncate">
+                <div class="day col-sm p-2 border text-truncate">
                     <h5 class="row align-items-center">
                         <span class="date col-1">{{$i}}</span>
                         <small class="col d-sm-none text-center text-muted">{{$i}}</small>
