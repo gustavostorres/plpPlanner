@@ -25,12 +25,24 @@
                 </div>
             @endfor
             @for ($i = 1; $i <= $dias; $i++)
+                @php
+                $dia = date("d");
+                @endphp
+                @if($dia == $i)
+                <div class="day col-sm p-2 border text-truncate" style="background-color: #A8A8A8;">
+                    <h5 class="row align-items-center">
+                        <span class="date col-1">{{$i}}</span>
+                        <small class="col d-sm-none text-center text-muted">{{$i}}</small>
+                        <span class="col-1"></span>
+                    </h5>
+                @else
                 <div class="day col-sm p-2 border text-truncate">
                     <h5 class="row align-items-center">
                         <span class="date col-1">{{$i}}</span>
                         <small class="col d-sm-none text-center text-muted">{{$i}}</small>
                         <span class="col-1"></span>
                     </h5>
+                @endif
                     @php
                     $data = new DateTime($i.'-'.$mes.'-'.$ano);
                     $data = $data->format('Y-m-d');
